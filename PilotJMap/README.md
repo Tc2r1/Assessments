@@ -32,8 +32,8 @@ The developer must use the following libraries:
 Open the Project in Android Studio.
 
 ## Screenshots
+<img src="preview_01.png" width="200" /> <img src="preview_02.png" width="200" /> <img src="preview_03.png" width="200" />
 
-![Screen shot 1](/PilotMap/preview_01.png) ![Screen shot 2](/PilotMap/preview_02.png) ![Screen shot 3](/PilotMap/preview_03.png)
 
 ## Nudennie's Notes on Project:
 
