@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.pilotflyingj.codechallenge.R
 import com.pilotflyingj.codechallenge.databinding.FragmentAboutBinding
 import com.pilotflyingj.codechallenge.viewmodel.AboutViewModel
 import com.pilotflyingj.codechallenge.viewmodel.AboutViewModelFactory
 
+
 class AboutFragment : Fragment() {
 
-    private lateinit var viewModel: AboutViewModel
     private lateinit var viewModelFactory: AboutViewModelFactory
 
     // Contains all the views
@@ -22,6 +22,8 @@ class AboutFragment : Fragment() {
     // This property is only valid between onCreateView and onDestoryView
     private val binding get() = _binding!!
 
+    private val viewModel: AboutViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +31,8 @@ class AboutFragment : Fragment() {
     ): View? {
         // Inflate view and obtain an instance of the binding class.
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
-        viewModelFactory =
-            AboutViewModelFactory(getString(AboutFragmentArgs.fromBundle(requireArguments()).aboutDescription))
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AboutViewModel::class.java)
         binding.aboutViewModel = viewModel
+        binding.tvAbout.text = getString(R.string.about_text)
 
         setHasOptionsMenu(true)
         return binding.root

@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -29,17 +31,16 @@ class MapsFragment : Fragment() {
     // Contains all the views
     private var _binding: FragmentMapsBinding? = null
 
-    // This property is only valid between onCreateView and onDestoryView
+    // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
 
-    private lateinit var mapsViewModel: MapsViewModel
+    private val mapsViewModel: MapsViewModel by viewModels()
+
+
     private lateinit var mMap: GoogleMap
     private lateinit var mapsViewModelFactory: MapsViewModelFactory
-
-    @Inject
-    lateinit var mapRepository: MapRepository
 
 
     override fun onCreateView(
@@ -48,12 +49,11 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        mapsViewModelFactory = MapsViewModelFactory(mapRepository)
-        mapsViewModel = ViewModelProvider(this, mapsViewModelFactory).get(MapsViewModel::class.java)
-
         binding.viewModel = mapsViewModel
         binding.lifecycleOwner = this
 
+
+        setHasOptionsMenu(true)
         return binding.root
     }
 

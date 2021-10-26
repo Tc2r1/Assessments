@@ -8,6 +8,7 @@ import com.pilotflyingj.codechallenge.network.models.ApiSite
 import com.pilotflyingj.codechallenge.repository.MapRepository
 import com.pilotflyingj.codechallenge.repository.models.Site
 import com.pilotflyingj.codechallenge.utility.transform
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -16,7 +17,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.random.Random
 
-
+@HiltViewModel
 class MapsViewModel @Inject constructor(
     private val mapRepository: MapRepository
 ) : ViewModel() {
@@ -31,7 +32,7 @@ class MapsViewModel @Inject constructor(
     var job: Job? = null
 
     init {
-        Timber.wtf("View Model Created!")
+        Timber.i("View Model Created!")
         when (Random.nextBoolean()) {
             true -> fetchSitesWithoutCoroutines()
             false -> fetchSitesWithCoroutines()
