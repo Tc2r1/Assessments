@@ -1,6 +1,7 @@
 # PFJ Android Coding Challenge! - Nudennie White
 
-##![Project Instructions File](instructions.pdf)
+![Project Instructions File](instructions.pdf)
+
 **Instructions** 
 The purpose of this application is to load a set of locations from a
 JSON file and display the locations as a pin on the map.  
@@ -31,7 +32,7 @@ The developer must use the following libraries:
 Open the Project in Android Studio.
 
 ## Screenshots
-<img src="preview_01.png" width="200" /> <img src="preview_02.png" width="200" /> <img src="preview_03.png" width="200" />
+<img src="preview_01.png" width="300" /> <img src="preview_02.png" width="300" /> <img src="preview_03.png" width="300" />
 
 
 ## Nudennie's Notes on Project:
@@ -91,6 +92,6 @@ By using the above I was able to take most logical code completely out of the vi
 I tried to employ good annotation but eventually got tired. About page is lacking lol. 
 
 
-*## Missed Goals: 
+## Missed Goals:
 I did not Unit Test the API Layer. I know I could and how to, but I'm pretty beat and got carried away in functionality. 
 There are a lot of UI Improvements from the base project I would like to implement, lol but this is suppose to be an assessment so I have to stop >_<

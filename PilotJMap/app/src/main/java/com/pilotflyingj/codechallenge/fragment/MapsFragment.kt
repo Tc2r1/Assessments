@@ -21,7 +21,6 @@ import com.pilotflyingj.codechallenge.repository.MapRepository
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModel
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import leakcanary.AppWatcher
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -124,10 +123,6 @@ class MapsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         // prevents memory leaks
-        AppWatcher.objectWatcher.expectWeaklyReachable(
-            _binding as Any,
-            "AtivityMapsBinding was detected."
-        )
         _binding = null
 
     }
