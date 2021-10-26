@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
-class AboutViewModel(aboutDescription: String) : ViewModel() {
+class AboutViewModel(description: String) : ViewModel() {
     private var _aboutDescription = MutableLiveData<String>()
 
     // Encapsulation using Backing Properties
@@ -14,6 +14,6 @@ class AboutViewModel(aboutDescription: String) : ViewModel() {
 
     init {
         Timber.d("About View Model Created!")
-        _aboutDescription.value = aboutDescription
+        _aboutDescription.value = description
     }
 }
