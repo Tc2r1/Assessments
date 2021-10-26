@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">World Countries</string>
+    <string name="country_intent_label" translatable="false">Country</string>
+    <string name="country_area_measurement">" km²"</string>
+
+    <!--Json Information-->
+    <string name="json_country_label_native" translatable="false">nativeName</string>
+    <string name="json_country_label_name" translatable="false">name</string>
+    <string name="json_country_label_capital" translatable="false">capital</string>
+    <string name="json_country_label_population" translatable="false">population</string>
+    <string name="json_country_label_region" translatable="false">region</string>
+    <string name="json_country_label_subregion" translatable="false">subregion</string>
+    <string name="json_country_label_area" translatable="false">area</string>
+    <string name="json_country_area_null" translatable="false">null</string>
+    <string name="json_country_label_borders" translatable="false">borders</string>
+    <string name="json_country_label_currency" translatable="false">currencies</string>
+    <string name="json_country_label_language" translatable="false">languages</string>
+    <string name="json_input_file_name" translatable="false">countries.json</string>
+    <string name="json_input_byte_type" translatable="false">UTF-8</string>
+
+    <!--Details Activity -->
+    <string name="details_tv_native_name">Native Name</string>
+    <string name="details_tv_capital">Capital City</string>
+    <string name="details_tv_population">Population</string>
+    <string name="details_tv_region">Region</string>
+    <string name="details_tv_sub_region">Sub-Region</string>
+    <string name="details_tv_area">Area</string>
+    <string name="details_tv_currencies">Currencies</string>
+    <string name="details_tv_languages">Languages</string>
+    <string name="details_tv_neighbors">Neighboring Countries</string>
+</resources>

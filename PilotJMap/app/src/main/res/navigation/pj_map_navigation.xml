@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pj_map_navigation"
+    app:startDestination="@id/mapsFragment">
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.pilotflyingj.codechallenge.fragment.AboutFragment"
+        android:label="AboutFragment" >
+        <action
+            android:id="@+id/action_aboutFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="aboutDescription"
+            app:argType="reference"
+            android:defaultValue="@string/about_text"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.pilotflyingj.codechallenge.fragment.MapsFragment"
+        android:label="MapsFragment" >
+        <action
+            android:id="@+id/action_mapsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+</navigation>

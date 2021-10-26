@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.tc2r.worldcountries.DetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/details_tv_native_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_nat_name_header"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_nat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="Angola"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_capital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_capital_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_capital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="Luanda"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_population"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_population_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            />
+
+        <TextView
+            android:id="@+id/tv_population"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="24,383,301"
+            android:inputType="number"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_Region_header"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="Africa"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_sub_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_sub_region_header"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_sub_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="Middle Africa"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_area_header"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="1,246,700 km2"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_currencies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_currency_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_currencies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="A0A"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_languages_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            tools:text="pt"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="@string/details_tv_neighbors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_neighbors_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <TextView
+            android:id="@+id/tv_neighbors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_marginBottom="8dp"
+            tools:text="COG, COD, ZMB, NAM"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

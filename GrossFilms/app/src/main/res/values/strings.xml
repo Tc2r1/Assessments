@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">GrossFilms</string>
+    <string name="table_insert_success">" Inserted"</string>
+    <string name="table_insert_failure">" Insertion FAILED"</string>
+    <string name="error_no_data">No Data Found</string>
+    <string name="error">Error</string>
+    <string name="films_label">Films</string>
+    <string name="get_url">https://tchost.000webhostapp.com/get_gross_films.php?</string>
+    <string name="http_response">Response</string>
+    <string name="data_call_error">Data Not Received!</string>
+
+
+    <string-array name="movieTitle">
+        <item>"Captain America: Civil War"</item>
+        <item>"Rogue One: A Star Wars Story"</item>
+        <item>"Finding Dory"</item>
+        <item>"Zootopia"</item>
+        <item>"The Jungle Book"</item>
+        <item>"The Secret Life Of Pets"</item>
+        <item>"Batman v Superman: Dawn Of Justice"</item>
+        <item>"Fantastic Beast and Where to Find Them"</item>
+        <item>"Deadpool"</item>
+        <item>"Suicide Squad"</item>
+    </string-array>
+
+    <string-array name="movieDist">
+        <item>"Disney"</item>
+        <item>"Disney"</item>
+        <item>"Disney"</item>
+        <item>"Disney"</item>
+        <item>"Disney"</item>
+        <item>"Universal"</item>
+        <item>"Warner Bros."</item>
+        <item>"Warner Bros."</item>
+        <item>"20th Century Fox"</item>
+        <item>"Warner Bros."</item>
+    </string-array>
+
+    <string-array name="movieGross">
+        <item>"1153304495"</item>
+        <item>"1052352131"</item>
+        <item>"1028213633"</item>
+        <item>"1023784195"</item>
+        <item>"966550600"</item>
+        <item>"875457937"</item>
+        <item>"873260194"</item>
+        <item>"812012652"</item>
+        <item>"783112979"</item>
+        <item>"745600054"</item>
+    </string-array>
+
+</resources>

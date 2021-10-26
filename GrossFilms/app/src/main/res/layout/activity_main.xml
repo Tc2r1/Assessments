@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   tools:context="com.assessment.tc2r.grossfilms.MainActivity">
+
+    <Button
+        android:id="@+id/btn_fromlocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Create From Local"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btn_fromremote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create From Remote"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/btn_fromlocal"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btn_viewAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/btn_fromremote"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_viewAll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="109dp"
+        android:id="@+id/progressBar"/>
+
+    <TextView
+        android:text="ERROR!!!"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_viewAll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:id="@+id/tv_error"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:fontFamily="monospace"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"/>
+
+</RelativeLayout>

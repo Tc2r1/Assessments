@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Nudennie White PFJ Code Challenge</string>
+    <string name="title_activity_maps">Flying Map</string>
+    <string name="share_text">Check This Out! %1$s</string>
+    <string name="share">Share</string>
+    <string name="sharing_not_available">Sharing Not Available</string>
+    <string name="about">About</string>
+    <string name="about_text">Android Coding Challenge</string>
+    <string name="quote_format">\" PJ %s PJ \"</string>
+    <string name="share_success_text">hey I really want to let you know we want to move forward with this developer!  Nudennie White :D</string>
+
+</resources>
