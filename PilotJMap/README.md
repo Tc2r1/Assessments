@@ -6,27 +6,44 @@
 The purpose of this application is to load a set of locations from a
 JSON file and display the locations as a pin on the map.  
 The developer must use the following libraries:
--  KotlinX Serialization
--  Retrofit & OKHttp
--  Kotlin Coroutines
--  Live Data (AndroidX)
--  ViewModel (AndroidX)
--  GoogleMaps
--  Leak Canary
--  Dagger Hilt  
-   The architecture should be MVVM.  
-   The acceptance criteria for this program is as follows:
--  Application shows a map on launch and requests locations
--  Locations loaded are sent to the map as markers
--  On rotation, the API is not called again  
-     The developer must not override the system’s default behavior for configuration change
--  The app is written entirely in Kotlin
--  All libraries required above are used
--  Dependency injection is used, where appropriate
--  Unit testing is performed on the API layer
--  Pin markers show up for every entry the API provides
--  Coroutines are used, no RxJava or other async methods should be used
 
+-  KotlinX Serialization
+
+-  Retrofit & OKHttp
+
+-  Kotlin Coroutines
+
+-  Live Data (AndroidX)
+
+-  ViewModel (AndroidX)
+
+-  GoogleMaps
+
+-  Leak Canary
+
+-  Dagger Hilt  
+
+-  The architecture should be MVVM.  
+
+-  Application shows a map on launch and requests locations
+
+-  Locations loaded are sent to the map as markers
+
+-  On rotation, the API is not called again  
+
+-  The developer must not override the system’s default behavior for configuration change
+
+-  The app is written entirely in Kotlin
+
+-  All libraries required above are used
+
+-  Dependency injection is used, where appropriate
+
+-  Unit testing is performed on the API layer
+
+-  Pin markers show up for every entry the API provides
+
+-  Coroutines are used, no RxJava or other async methods should be used
 
 
 Open the Project in Android Studio.
@@ -60,36 +77,62 @@ I could have done more but I feel like I've put more than enough energy into thi
 
 ## Libraries Utilized: 
 
-Android Map Utils
-constraint layout
-Moshi
-Dagger2
-Hilt
-Kotlinx Coroutines
-Jetpack
-Kotlinx Serialization
-Leak Canary
-Android Lifecycle (LiveData ViewModel)
-Material
-Navigation Arch
-OKHttp
-Play Services
-RxAndroid
-RxJava3 Retrofit
-Timber
-GoogleMaps
+- Android Map Utils
+
+- Constraint layout
+
+- Moshi
+
+- Dagger2
+
+- Hilt
+
+- Kotlinx Coroutines
+
+- Jetpack
+
+- Kotlinx Serialization
+
+- Leak Canary
+
+- Android Lifecycle (LiveData ViewModel)
+
+- Material
+
+- Navigation Arch
+
+- OKHttp
+
+- Play Services
+
+- RxAndroid
+
+- RxJava3 Retrofit
+
+- Timber
+
+- GoogleMaps
 
 ## Extras:
 
 I implemented a navgraph to take advantage of Android Navigation.
+
 To actually use It I created an About Fragment Lol
+
 I restructured the code to a more common accepted design pattern of a Master Activity that cycles fragments.
+
 I refactored MapActivity into MapFragment so that I could use the navgraph (I like this thing k dont judge me!)
+
 I displayed multiple ways of calling the API to retrieve data. 
+
 I Designed the application in the MVVM style.  (Model View ViewModel utilizing LiveData to update my views)
+
 I used Kotlin Databinding as well as Dagger Databinding in order to Inject when possible. 
+
 By using the above I was able to take most logical code completely out of the views, having the objects react from the ViewModels themselves. 
+
 I tried to employ good annotation but eventually got tired. About page is lacking lol. 
+
 
 
 ## Missed Goals:
