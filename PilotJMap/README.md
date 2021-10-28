@@ -3,6 +3,7 @@
 ![Project Instructions File](instructions.pdf)
 
 **Instructions** 
+
 The purpose of this application is to load a set of locations from a
 JSON file and display the locations as a pin on the map.  
 The developer must use the following libraries:
