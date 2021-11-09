@@ -1,0 +1,2 @@
+rootProject.name = "FiskerAssessment"
+include ':app'
