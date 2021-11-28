@@ -1,5 +1,6 @@
 package com.pilotflyingj.codechallenge.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +42,7 @@ class MapsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         binding.viewModel = mapsViewModel
         binding.lifecycleOwner = this
@@ -50,10 +51,17 @@ class MapsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("PotentialBehaviorOverride")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
+        mapFragment?.getMapAsync { mMap ->
+            // subscribe to live data for view model so that markers get added
+            subscribeToViewModel(mMap)
+
+            // Set custom info window adapter
+            mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(requireContext()))
+        }
     }
 
     /**
@@ -61,6 +69,7 @@ class MapsFragment : Fragment() {
      * Once we know the map is created, we can begin making changes to the map.
      *
      */
+    @SuppressLint("PotentialBehaviorOverride")
     private val callback = OnMapReadyCallback { mMap ->
         /**
          * Manipulates the map once available.
@@ -82,7 +91,12 @@ class MapsFragment : Fragment() {
         // subscribe to live data for view model so that markers get added
         subscribeToViewModel(mMap)
 
-        mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(this))
+        // Set custom info window adapter
+        mMap.setInfoWindowAdapter(
+            MarkerInfoWindowAdapter(
+                requireContext()
+            )
+        )
     }
 
     /**
@@ -94,7 +108,7 @@ class MapsFragment : Fragment() {
     private fun subscribeToViewModel(mMap: GoogleMap) {
         Timber.e("subscribeToViewModel Called!")
         mapsViewModel.sites.observe(
-            this,
+            viewLifecycleOwner,
             Observer { listOfSites ->
                 for (site in listOfSites) {
 

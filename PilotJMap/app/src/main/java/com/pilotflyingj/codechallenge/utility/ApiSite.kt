@@ -5,7 +5,6 @@ package com.pilotflyingj.codechallenge.utility
 import com.google.android.gms.maps.model.LatLng
 import com.pilotflyingj.codechallenge.network.models.ApiSite
 import com.pilotflyingj.codechallenge.repository.models.Site
-import java.lang.StringBuilder
 
 /**
  * Extensions for [ApiSite] to convert into [Site] objects
@@ -25,7 +24,7 @@ fun ApiSite.transform(): Site {
 //            , LatLng(latitude, longitude)
 //        )
 
-        return Site(storeName, LatLng(latitude, longitude))
+        return Site(storeName, LatLng(latitude, longitude), address, phone)
     }
 }
 
