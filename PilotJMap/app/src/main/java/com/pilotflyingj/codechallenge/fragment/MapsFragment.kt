@@ -8,8 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,12 +17,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.pilotflyingj.codechallenge.R
 import com.pilotflyingj.codechallenge.databinding.FragmentMapsBinding
-import com.pilotflyingj.codechallenge.repository.MapRepository
+import com.pilotflyingj.codechallenge.utility.MarkerInfoWindowAdapter
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModel
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
@@ -38,10 +35,7 @@ class MapsFragment : Fragment() {
 
     private val mapsViewModel: MapsViewModel by viewModels()
 
-
-    private lateinit var mMap: GoogleMap
     private lateinit var mapsViewModelFactory: MapsViewModelFactory
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +45,6 @@ class MapsFragment : Fragment() {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         binding.viewModel = mapsViewModel
         binding.lifecycleOwner = this
-
 
         setHasOptionsMenu(true)
         return binding.root
@@ -68,7 +61,7 @@ class MapsFragment : Fragment() {
      * Once we know the map is created, we can begin making changes to the map.
      *
      */
-    private val callback = OnMapReadyCallback { googleMap ->
+    private val callback = OnMapReadyCallback { mMap ->
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -79,16 +72,17 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         // center camera on the entire USA
-        mMap = googleMap
         mMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 mapsViewModel.startPoint,
                 mapsViewModel.startZoom
             )
-        );
+        )
 
         // subscribe to live data for view model so that markers get added
-        subscribeToViewModel()
+        subscribeToViewModel(mMap)
+
+        mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(this))
     }
 
     /**
@@ -97,23 +91,26 @@ class MapsFragment : Fragment() {
      * When the api returns data to the ViewModel.
      * We are able to populate the Map with markers.
      */
-    private fun subscribeToViewModel() {
+    private fun subscribeToViewModel(mMap: GoogleMap) {
         Timber.e("subscribeToViewModel Called!")
-        mapsViewModel.sites.observe(this, Observer { listOfSites ->
-            for (site in listOfSites) {
+        mapsViewModel.sites.observe(
+            this,
+            Observer { listOfSites ->
+                for (site in listOfSites) {
 
-                mMap.addMarker(
-                    MarkerOptions().position(site.location)
-                        .title(site.name)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                )
+                    val marker = mMap.addMarker(
+                        MarkerOptions()
+                            .position(site.location)
+                            .title(site.name)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    )
 
-                /**
-                 *  I would create a custom info adapter to have a custom info window. so that
-                 *  the code commented out in [ApiSite] would look really amazing.
-                 */
+                    // Set place as the tag on the marker object so it can be referenced
+                    // within the MarkerInfoWindowAdapter
+                    marker?.tag = site
+                }
             }
-        })
+        )
     }
 
     /**
@@ -124,6 +121,5 @@ class MapsFragment : Fragment() {
         super.onDestroy()
         // prevents memory leaks
         _binding = null
-
     }
 }
