@@ -18,13 +18,13 @@ class MarkerInfoWindowAdapter(
         return null
     }
 
-    override fun getInfoContents(marker: Marker?): View? {
+    override fun getInfoContents(marker: Marker): View? {
 
         // 2. Inflate view and set title, address, and rating
         val view = LayoutInflater.from(context).inflate(R.layout.marker_info_contents, null)
 
         // 1. Get Tag
-        val site = marker?.tag as? Site ?: return null
+        val site = marker.tag as? Site ?: return null
 
         view.findViewById<TextView>(R.id.text_view_title).text = site.name
         view.findViewById<TextView>(R.id.text_view_address).text = site.address

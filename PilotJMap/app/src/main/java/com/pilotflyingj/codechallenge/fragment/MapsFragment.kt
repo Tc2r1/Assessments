@@ -8,21 +8,23 @@ import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.awaitMapLoad
 import com.pilotflyingj.codechallenge.R
 import com.pilotflyingj.codechallenge.databinding.FragmentMapsBinding
+import com.pilotflyingj.codechallenge.repository.models.Site
 import com.pilotflyingj.codechallenge.utility.MarkerInfoWindowAdapter
+import com.pilotflyingj.codechallenge.utility.SiteRenderer
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModel
 import com.pilotflyingj.codechallenge.viewmodel.MapsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
@@ -31,12 +33,8 @@ class MapsFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var drawerLayout: DrawerLayout
 
     private val mapsViewModel: MapsViewModel by viewModels()
-
-    private lateinit var mapsViewModelFactory: MapsViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,82 +53,67 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
-        mapFragment?.getMapAsync { mMap ->
-            // subscribe to live data for view model so that markers get added
-            subscribeToViewModel(mMap)
 
-            // Set custom info window adapter
-            mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(requireContext()))
+        lifecycleScope.launchWhenCreated {
+            // Get the Map
+            mapFragment?.let { fragment ->
+                val googleMap = fragment.awaitMap()
+
+                // Wait for the map to finish loading
+                googleMap.awaitMapLoad()
+
+                mapsViewModel.sites.observe(
+                    viewLifecycleOwner,
+                    { listOfSites ->
+                        // Ensure all places are visible in the map
+                        val bounds = LatLngBounds.builder()
+                        listOfSites.forEach { bounds.include(it.location) }
+                        googleMap.moveCamera(
+                            CameraUpdateFactory.newLatLngBounds(
+                                bounds.build(),
+                                20
+                            )
+                        )
+                        addClusteredMarkers(googleMap, listOfSites)
+                    }
+                )
+            }
         }
     }
 
     /**
-     * A Callback when google has successfuly generated a map in background.
-     * Once we know the map is created, we can begin making changes to the map.
-     *
+     * Adds markers to the map with clustering support.
      */
-    @SuppressLint("PotentialBehaviorOverride")
-    private val callback = OnMapReadyCallback { mMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        // center camera on the entire USA
-        mMap.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                mapsViewModel.startPoint,
-                mapsViewModel.startZoom
-            )
-        )
+    private fun addClusteredMarkers(googleMap: GoogleMap, listOfSites: List<Site>) {
 
-        // subscribe to live data for view model so that markers get added
-        subscribeToViewModel(mMap)
+        val clusterManager = ClusterManager<Site>(requireContext(), googleMap)
+        clusterManager.renderer = SiteRenderer(
+            requireContext(),
+            googleMap,
+            clusterManager
+        )
 
         // Set custom info window adapter
-        mMap.setInfoWindowAdapter(
-            MarkerInfoWindowAdapter(
-                requireContext()
-            )
-        )
+        clusterManager.markerCollection.setInfoWindowAdapter(MarkerInfoWindowAdapter(requireContext()))
+
+        // Add the sites to the ClusterManager.
+        clusterManager.addItems(listOfSites)
+        clusterManager.cluster()
+
+        // Set ClusterManager as the OnCameraIdleListener so that it
+        // can re-cluster when zooming in and out.
+        googleMap.setOnCameraIdleListener {
+            clusterManager.markerCollection.markers.forEach { it.alpha = 1.0f }
+            clusterManager.clusterMarkerCollection.markers.forEach { it.alpha = 1.0f }
+            clusterManager.onCameraIdle()
+        }
+
+        googleMap.setOnCameraMoveStartedListener {
+            clusterManager.markerCollection.markers.forEach { it.alpha = 0.3f }
+            clusterManager.clusterMarkerCollection.markers.forEach { it.alpha = 0.3f }
+        }
     }
 
-    /**
-     * Method to handle setting up an observer for
-     * the [Sites] variable of [MapsViewModel]
-     * When the api returns data to the ViewModel.
-     * We are able to populate the Map with markers.
-     */
-    private fun subscribeToViewModel(mMap: GoogleMap) {
-        Timber.e("subscribeToViewModel Called!")
-        mapsViewModel.sites.observe(
-            viewLifecycleOwner,
-            Observer { listOfSites ->
-                for (site in listOfSites) {
-
-                    val marker = mMap.addMarker(
-                        MarkerOptions()
-                            .position(site.location)
-                            .title(site.name)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                    )
-
-                    // Set place as the tag on the marker object so it can be referenced
-                    // within the MarkerInfoWindowAdapter
-                    marker?.tag = site
-                }
-            }
-        )
-    }
-
-    /**
-     * On Destroy, releases binding over objects
-     * to ensure no memory leaks.
-     */
     override fun onDestroy() {
         super.onDestroy()
         // prevents memory leaks
