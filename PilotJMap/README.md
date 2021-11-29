@@ -50,7 +50,11 @@ The developer must use the following libraries:
 Open the Project in Android Studio.
 
 ## Screenshots
-<img src="preview_01.png" width="300" /> <img src="preview_02.png" width="300" /> <img src="preview_03.png" width="300" />
+*Updated
+<img src="screen_shots/updated (1).png" width="300" /> <img src="screen_shots/updated (2).png" width="300" /> <img src="screen_shots/updated (3)" width="300" />
+
+*Previous Version
+<img src="screen_shots/preview_01.png" width="300" /> <img src="screen_shots/preview_02.png" width="300" /> <img src="screen_shots/preview_03.png" width="300" />
 
 
 ## Nudennie's Notes on Project:
@@ -77,6 +81,7 @@ ViewModel survives configuration changes.
 I could have done more but I feel like I've put more than enough energy into this assessment. lol and my face really hurts. (TODD: remove this sentence)
 
 ## Libraries Utilized: 
+- Android Maps KTX and KTX Utils
 
 - Android Map Utils
 
