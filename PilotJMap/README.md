@@ -50,10 +50,12 @@ The developer must use the following libraries:
 Open the Project in Android Studio.
 
 ## Screenshots
-*Updated
-<img src="screen_shots/updated (1).png" width="300" /> <img src="screen_shots/updated (2).png" width="300" /> <img src="screen_shots/updated (3)" width="300" />
-
-*Previous Version
+*Updated* 
+<br> 
+<img src="screen_shots/updated (1).png" width="300" /><br> <img src="screen_shots/updated (2).png"/><br> <img src="screen_shots/updated (3).png" />
+<br>
+*Previous Version*
+<br>
 <img src="screen_shots/preview_01.png" width="300" /> <img src="screen_shots/preview_02.png" width="300" /> <img src="screen_shots/preview_03.png" width="300" />
 
 
